@@ -1,0 +1,660 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Introduction to RESTful Architecture</title>
+	<meta name="description" content="Introduction to RESTful Architecture">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="css/deck.core.css">	
+	<link rel="stylesheet" href="css/style.css">
+	
+	<link rel="stylesheet" href="css/codemirror.css">
+	<link rel="stylesheet" href="css/lesser-dark.css">
+  
+	<script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+<body class="deck-container">
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Introduction to RESTful Architecture</h1>
+			<h2><a href="http://jeremyneiman.com/rest">http://jeremyneiman.com/rest</a></h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Why?</h1>
+			<h2>A standard format to make it easy for other computers (client programs) to navigate and interact with your API</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>Let's start with an example.</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>A <em>bad</em> example. </h1>
+	</section>
+	
+	<section class="slide">
+		<h1>Don't Do This</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>No</h1>
+	</section>
+	
+	<section class="slide">
+		<h1><em style="color:red;">Seriously</em></h1>
+	</section>
+	
+	<section class="slide">
+		<h1><strong>Don't</strong></h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<img src="img/notmyway.jpg"/>
+			<span style="font-size:.5em;">*Not a RESTful API.  Not even close.</span>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<img src="img/peeinggoat.jpg" class="slide"/>
+			<img src="img/kid.jpg" class="slide"/>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>The Datasets</h1>
+			<h2><a href="http://www.mta.info/developers/download.html">http://www.mta.info/developers/download.html</a></h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Subway/Bus/Train Schedules</h1>
+			<h2>Zip archives of .txt files containing CSV formatted data</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Performance Data</h1>
+			<h2>Zip archives of .xml files containing XML formatted data</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Service Status</h1>
+			<h2>.txt file containing XML formatted data</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Elevator/Escalator Status</h1>
+			<h2>.xml file containing XML formated data</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Fare Data</h1>
+			<h2>Web page listing of .csv files containing CSV formatted data.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>etc.</h1>
+			<h2>rand()</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1 style="color:red;">Lesson 1<h1>
+			<h1>Consistency</h1>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Lesson 2<h1>
+			<h1 style="color:red;">Accessibility</h1>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2 class="slide">Let's take a peek at one of them, shall we?</h2>
+			<h2 class="slide">Service Status is probably the most important piece of data if you're building a subway app.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div id="serviceStatus1" class="vcenter slide" style="font-family:FreeMono, Courier New;text-align:left;">
+			&lt;line&gt;
+			<br>	&lt;name&gt;123&lt;/name&gt; <span class="slide" style="color:red;">Smallest <em>resource</em> is subway line, not individual subway.</span>
+			<br>	&lt;status&gt;GOOD SERVICE&lt;/status&gt;
+			<br>	&lt;text /&gt; <span class="slide" style="color:red;">Empty Element...</span>
+			<br>	&lt;Date&gt;&lt;/Date&gt; <span class="slide" style="color:red;">...Empty Element</span>
+			<br>	&lt;Time&gt;&lt;/Time&gt; <span class="slide" style="color:red;">Why are they different formats?</span>
+			<br>&lt;/line&gt;
+			<div class="slide" style="font-size:200%;color:blue;text-align:center;">But looks serviceable.</div>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>How about when there isn't good service?</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter" style="font-family:FreeMono, Courier New;font-size:75%;text-align:left;">
+			&lt;line&gt;
+			<br>    &lt;name&gt;NQR&lt;/name&gt;
+			<br>    &lt;status&gt;SERVICE CHANGE&lt;/status&gt;
+			<br>    &lt;text&gt;
+			<br>                    &amp;lt;span class=&quot;TitleServiceChange&quot; &amp;gt;Service Change&amp;lt;/span&amp;gt;
+			<br>                    &amp;lt;span class=&quot;DateStyle&quot;&amp;gt;
+			<br>                    &amp;amp;nbsp;Posted:&amp;amp;nbsp;04/22/2012&amp;amp;nbsp; 1:50PM
+			<br>                    &amp;lt;/span&amp;gt;
+			<br>                    &amp;lt;br/&amp;gt;
+			<br>                    &amp;lt;br/&amp;gt;
+			<br>                  &amp;lt;P&amp;gt;Due to a signal problem at the &amp;lt;STRONG&amp;gt;Coney Island-Stillwell Avenue Station&amp;lt;/STRONG&amp;gt;, downtown [N] trains are terminating at the &amp;lt;STRONG&amp;gt;Bay Parkway Station&amp;lt;/STRONG&amp;gt; on the [D] line.&amp;lt;/P&amp;gt;
+			<br>&amp;lt;P&amp;gt;For service between the &amp;lt;STRONG&amp;gt;Bay Parkway Station&amp;lt;/STRONG&amp;gt; and the &amp;lt;STRONG&amp;gt;Coney Island-Stillwell Avenue Station&amp;lt;/STRONG&amp;gt;, customers are advised to transfer to a Coney Island-bound [D] train at the &amp;lt;STRONG&amp;gt;Bay Parkway Station&amp;lt;/STRONG&amp;gt;.&amp;lt;/P&amp;gt;
+			<br>&amp;lt;P&amp;gt;Please expect delays in [N] train service at this time.&amp;lt;/P&amp;gt;
+			<br>                &amp;lt;br/&amp;gt;
+			<br>                &amp;lt;br/&amp;gt;
+			<br>              
+			<br>                    &amp;lt;span class=&quot;TitlePlannedWork&quot; &amp;gt;Planned Work&amp;lt;/span&amp;gt;
+			<br>                    &amp;lt;br/&amp;gt;
+			<br>                  &amp;lt;HTML&amp;gt;&amp;lt;BODY&amp;gt;&amp;lt;a class=&quot;plannedWorkDetailLink&quot; onclick=ShowHide(36886);&amp;gt;
+			<br>&amp;lt;b&amp;gt;[N] Coney Island-bound trains run via the [D] from 36 St to Stillwell Av
+			<br>&amp;lt;/a&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;&amp;lt;div id= 36886 class=&quot;plannedWorkDetail&quot; &amp;gt;&amp;lt;/b&amp;gt;Weekend, 12:01 AM Sat to 5 AM Mon, Apr 21 - 23
+			<br>&amp;lt;br&amp;gt;
+			<br>&amp;lt;br&amp;gt;Trains stop at 62 St-New Utrecht Av.
+			<br>&amp;lt;br&amp;gt;
+			<br>&amp;lt;br&amp;gt;For 45, 53 and 59 Sts, take the [R] instead. Transfer between trains at 36 St.
+			<br>&amp;lt;br&amp;gt;
+			<br>&amp;lt;br&amp;gt;&amp;lt;/font&amp;gt;For service &amp;lt;i&amp;gt;to&amp;lt;/i&amp;gt; 8 Av, Fort Hamilton Pkwy, 18, 20 Avs, Bay Pkwy, Kings Hwy, Avenue U and 86 St, 
+			<br>&amp;lt;br&amp;gt;take the [N] to 62 St-New Utrecht Av &amp;lt;/font&amp;gt;(&amp;lt;a href=http://www.mta.info/nyct/service/NewUtrechtAv_access.htm target=blank&amp;gt;&amp;lt;font color=#0000FF&amp;gt;&amp;lt;u&amp;gt;out-of-system transfer&amp;lt;/u&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt;) or Stillwell Av and transfer to an Astoria-bound [N].
+			<br>&amp;lt;br&amp;gt;
+			<br>&amp;lt;br&amp;gt;For service &amp;lt;i&amp;gt;from&amp;lt;/i&amp;gt; these stations, take the [N] to New Utrecht Av-62 St &amp;lt;/font&amp;gt;(&amp;lt;a href=http://www.mta.info/nyct/service/NewUtrechtAv_access.htm target=blank&amp;gt;&amp;lt;font color=#0000FF&amp;gt;&amp;lt;u&amp;gt;out-of-system transfer&amp;lt;/u&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt;) or 
+			<br>&amp;lt;br&amp;gt;36 St and transfer to a Coney Island-bound&amp;amp;nbsp;[D]&amp;amp;nbsp;or&amp;amp;nbsp;[N].
+			<br>&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;
+			<br>&amp;lt;br&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/BODY&amp;gt;&amp;lt;/HTML&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;br/&amp;gt;
+			<br>                &amp;lt;br/&amp;gt;
+			<br>                &amp;lt;br/&amp;gt;
+			<br>              &lt;/text&gt;
+			<br>    &lt;Date&gt;04/22/2012&lt;/Date&gt;
+			<br>    &lt;Time&gt; 1:50PM&lt;/Time&gt;
+			<br>  &lt;/line&gt;
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>What the !@$%? was that?</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide" style="font-family:FreeMono, Courier New;font-size:150%;text-align:left;">
+			<div>&amp;lt;span class=&quot;TitlePlannedWork&quot; &amp;gt;Planned Work&amp;lt;/span&amp;gt;</div>
+			<div class="slide" style="color:red;">Ahhh, it's html.</div>
+			<div class="slide">&amp;lt;HTML&amp;gt;&amp;lt;BODY&amp;gt;&amp;lt;a class=&quot;plannedWorkDetailLink&quot; onclick=ShowHide(36886);&amp;gt;</div>
+			<div class="slide" style="color:red;">And there's some javascript.</div>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide">
+			<h1>But Why???</h1>
+			<h2 class="slide">Hmm...no, they couldn't be <em>that</em> stupid</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<img src="img/serviceStatus.png"/>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h3>*view source*</h3>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h3>*facepalm*</h3>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>How do they expect other people to use this?</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>Lesson 3<h1>
+			<h1 style="color:red;">Data. Not Style.</h1>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>REST</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>URI</h1>
+			<h2>Uniform Resource Identifier</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>URIs Represent Resources</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide">
+			<h1>What Are Resources?</h1>
+			<ul style="text-align:left;">
+				<li class="slide">
+					<h2 class="bullet-heading">Collection - A directory of resources.</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Document - A single resource.</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/oscar</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/ubuntu</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Controller - A non-CRUD procedure.</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/ubuntu/feed</h2>
+				</li>
+			<ul>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>Designing the URIs</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<div style="text-align:left;">
+				<h2>The URI path represents the resource hierarchy.</h2>
+				<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/organisms/animals/cats/ubuntu</h2>
+				<h2>Given the above, all of the following should be valid URIs.</h2>
+				<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/organisms/animals/cats</h2>
+				<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/organisms/animals</h2>
+				<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/organisms</h2>
+			<div>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide">
+			<h1>Rules</h1>
+			<ul style="text-align:left;">
+				<li class="slide">
+					<h2 class="bullet-heading">No Trailing Slashes</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;text-decoration:line-through;">/cats/ubuntu/</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/ubuntu</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Prefer Lowercase Letters</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;text-decoration:line-through;">/cats/ubuntu</h2>
+					<h2>is not the same as</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/Ubuntu</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Use Hyphens To Improve Readability.  Don't Use Underscores.</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;text-decoration:line-through;">/cats/cait_sith</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/cait-sith</h2>
+				</li>
+			<ul>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide">
+			<h1>Query Parameters</h1>
+			<ul style="text-align:left;">
+				<li class="slide">
+					<h2 class="bullet-heading">Filter Collections</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats?color=black</h2>
+					<h2>Return all black cats</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Paginate collection results</h2>
+					<h2>Don't return a large collection all at once.</h2>
+					<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats?pageSize=10&pageStartIndex=50</h2>
+				</li>
+			<ul>
+		</div>
+	</section>
+	
+	
+	<section class="slide">
+		<h1>Representations</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>Resource =/= Representation</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>A representation is the format used to transfer the resource.</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>JSON, XML, ATOM, YAML</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2 class="bullet-heading">Specify the format using a query paramter</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">/cats/ubuntu?format=json</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>HTTP Request Methods</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>HTTP request methods represent CRUD actions</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>GET</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Retrieve a resource's representation.</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">GET /cats/ubuntu</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>A GET must <span style="color:red;">NEVER</span> make changes to the resource or have side effects.</h2></
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>PUT</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Create a new resource at a known URI</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">PUT /cats/ubuntu</h2>
+			<h2 style="padding-top:50px;">The request body contains a representation of the resource to be created.</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">{name:ubuntu, color:brown, gender:male}</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Modify an existing resource.</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">PUT /cats/ubuntu</h2>
+			<h2>The request body contains a representation of the attributes to modify</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">{gender:female}</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>POST</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Create a new resource in a collection when the URI is unknown</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">POST /cats</h2>
+			<h2 style="padding-top:50px;">The request body contains a representation of the resource to be created.</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">{name:ubuntu, color:brown, gender:male}</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Execute a controller</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">POST /cats/ubuntu/feed</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>POSTs are unpredictable and resending a POST request can have undesired side-effects.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>DELETE</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Remove a resource from it's parent</h2>
+			<h2 style="padding-top:0;margin:0 0 0 0;font-family:FreeMono, Courier New;">DELETE /cats/ubuntu</h2>
+			<h1>D*:</h1>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>After a DELETE, the resource should no longer be accessible at it's URI by future requests.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>Response Status Codes</h1>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>HTTP response status codes should be used to inform the client of the overall result.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>200 OK</h1>
+			<h2>General-purpose success code, if none of the more specific ones apply.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>201 Created</h1>
+			<h2>When a new resource has been successfully created.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>202 Accepted</h1>
+			<h2>Only used by controllers.  When a process is asynchronous but it was started successfully.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>204 No Content</h1>
+			<h2>When the body is intentionally empty, such as for PUT, POST and DELETE requests.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>301 Moved Permanently</h1>
+			<h2>If the API's architecture has changed and a resource now uses a new URI.  The new URI should be specified in the response.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>303 See Other</h1>
+			<h2>Refers the client to another URI, such as when a controller generates a resource.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>307 Temporary Redirect</h1>
+			<h2>Tells the client that nothing was done with their request and they should resubmit to the specified URI.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>400 Bad Request</h1>
+			<h2>General-purpose client-side error code, when no other 4XX code applies.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>401 Unauthorized</h1>
+			<h2>If a resource requires authorization and there were incorrect or no credentials given.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>403 Forbidden</h1>
+			<h2>If an authenticated user attempt to access a resource they are not allowed to.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>404 Not Found</h1>
+			<h2>If the given URI can't be mapped to a resource.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>405 Method Not Allowed</h1>
+			<h2>If an HTTP method is used on a URI that does not allow it, such as GET on a controller.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>500 Internal Server Error</h1>
+			<h2>An generic error on the server.  500 means that it wasn't the client's fault and they should resubmit their request.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h1>418 I'm A Teapot</h1>
+			<h2>If the client attempts to brew coffee and the HTCPCP Server is a teapot.  The resulting body MAY be short and stout.</h2>
+		</div>
+	</section>
+	
+	<!-- END -->
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Sorry, but this is just the tip of the RESTful iceberg.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter slide">
+			<h1>What else is there?</h1>
+			<ul style="text-align:left;">
+				<li class="slide">
+					<h2 class="bullet-heading">More Methods: HEAD, OPTIONS</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">More Status Codes</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">HTTP Headers</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Representation Design</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Security: Basic Authentication, Oauth</h2>
+				</li>
+				<li class="slide">
+					<h2 class="bullet-heading">Versioning</h2>
+				</li>
+			<ul>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>The good news: You're already way ahead of the curve.</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2>Want to learn more?</h2>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<div class="vcenter">
+			<h2><a href="http://lmgtfy.com/?q=REST">http://lmgtfy.com/?q=REST</a></h2>
+		</div>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+	<!-- scripts concatenated and minified via build script -->
+	<script src="js/plugins.js"></script>
+	<script src="js/script.js"></script>
+	<!-- end scripts -->
+
+	<!-- deck.js scripts -->
+	<script src="js/deck.core.js"></script>
+
+	<script>
+		$(function() {
+			$.deck('.slide');
+			
+			var played = false;
+			var snd = new Audio("scream.wav");
+			
+			$(document).bind('deck.change', function(event, from, to) {
+				console.log('Moving from slide ' + from + ' to ' + to);
+				
+				if (to == 32 && !played)
+				{
+					played = true;
+					setTimeout(function() { snd.play(); }, 500);
+				}
+			});
+			
+			$("h1").css("font-size", $(window).height()/12);
+			$("h2").css("font-size", $(window).height()/25);
+			$("#serviceStatus1").css("font-size", $(window).height()/40);
+			//$(".bullet-heading").css("font-size", $(window).heigh()/20);
+		});
+	</script>
+</body>
+</html>
